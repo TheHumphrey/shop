@@ -8,6 +8,7 @@ import { ImageContainer, ProductContainer, ProductDetails } from "../../styles/p
 
 interface ProductWithDescription extends ProductObject {
   description: string
+  defaultPriceId: string
 }
 
 interface ProductProps {
@@ -20,6 +21,10 @@ export default function Product({ product }: ProductProps) {
 
   if (isFallback) {
     return <p>Loading...</p>
+  }
+
+  const handleBuyProdcuct = () => {
+    console.log(product.defaultPriceId)
   }
 
   const { imageUrl, description, name, price } = product
@@ -37,7 +42,7 @@ export default function Product({ product }: ProductProps) {
 
         <p>{description}</p>
 
-        <button>
+        <button onClick={handleBuyProdcuct}>
           Comprar agora
         </button>
       </ProductDetails>
@@ -75,6 +80,7 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ para
           currency: 'BRL'
         }).format((price.unit_amount || 0) / 100),
         description: product.description,
+        defaultPriceId: price.id,
       },
     },
     revalidate: 60 * 60 * 1, // 1 hour
