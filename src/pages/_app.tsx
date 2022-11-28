@@ -7,8 +7,6 @@ import Image from 'next/image'
 
 globalStyles()
 
-console.log(logoImg)
-
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Container>
